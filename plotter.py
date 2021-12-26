@@ -2,6 +2,8 @@ from typing import List, Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
+import imageio
+import os
 
 
 class Plotter:
@@ -26,9 +28,12 @@ class Plotter:
         self.X, self.Y = np.meshgrid(map_x, map_y)
         self.V = np.power(self.X, 2) + self.X * self.Y + 2 * self.X + np.power(self.Y, 2)
 
-    def draw_animated_eveloution(self, generations: int) -> None:
+    def draw_animated_eveloution(self, generations: int, save_animation: bool, save_each_frame: bool) -> None:
         for i in range(generations):
             self.draw_frame(i)
+
+        if save_animation:
+            self.__export_animation(generations, save_each_frame)
 
     def draw_frame(self, generation: int) -> None:
         plt.cla()
@@ -43,6 +48,7 @@ class Plotter:
         plt.scatter(self.arguments[generation][0], self.values[generation][0], marker="*", c='r', label="best probe")
         plt.legend()
         plt.pause(self.animation_speed)
+        plt.savefig(f"frames/{generation}.png")
 
     def draw_background(self, generation: int) -> None:
         CS = self.ax.contour(self.X, self.Y, self.V)
@@ -57,3 +63,11 @@ class Plotter:
             arguments.append(list_x)
             values.append(list_y)
         return arguments, values
+
+    def __export_animation(self, generations: int, save_each_frame: bool) -> None:
+            with imageio.get_writer('animations/result.gif', mode='I') as writer:
+                for generation in range(generations):
+                    image = imageio.imread(f"frames/{generation}.png")
+                    writer.append_data(image)
+                    if not save_each_frame:
+                        os.remove(f"frames/{generation}.png")

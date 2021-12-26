@@ -93,19 +93,19 @@ class Simulation:
     def get_probe(self, index: int) -> Probe:
         return self.__population[index]
 
-    def draw_animation(self, animation_speed: int) -> None:
+    def draw_animation(self, animation_speed: int, save_animation: bool, save_each_frame: bool) -> None:
         if self.__population_data is None:
             raise Exception("You need to iniciate evolution proces first!")
 
         plotter = Plotter(self.__population_data, self.__bounds, animation_speed)
-        plotter.draw_animated_eveloution(self.__generations)
+        plotter.draw_animated_eveloution(self.__generations, save_animation, save_each_frame)
 
     def export_data(self) -> None:
         if self.__population_data is None:
             raise Exception("You need to iniciate evolution proces first!")
 
         json_data = json.dumps(self.__population_data)
-        f = open("result.json", "w")
+        f = open("export_data/result.json", "w")
         f.write(json_data)
         f.close()
 

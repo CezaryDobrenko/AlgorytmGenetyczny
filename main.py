@@ -6,8 +6,8 @@ def main():
     # Population settings
     bounds = (-4, 2)
     bit_size = 32
-    population_size = 9
-    generations = 2000
+    population_size = 10
+    generations = 50
     tournament_size = 4
     settings = {
         "single_point_mutation": True,
@@ -20,7 +20,7 @@ def main():
 
     simulation = Simulation(population_size, bit_size, bounds, tournament_size, settings)
     simulation.evolve(generations)
-    simulation.draw_animation(0.00001)
+    simulation.draw_animation(0.1, save_animation=True, save_each_frame=True)
     simulation.export_data()
 
     best_probe = simulation.get_best_probe()
