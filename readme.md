@@ -1,4 +1,14 @@
-Podstawowe dane pomagające w zapoznaniu się z projektem:
+<b>Pierwsze uruchomienie projektu:</b>
+
+Jeśli pip nie jest zainstalowany:
+https://pip.pypa.io/en/stable/installation/
+
+pip install --upgrade pip<br />
+pip install -r requirements.txt<br />
+python3 main.py<br />
+
+
+<b>Podstawowe dane pomagające w zapoznaniu się z projektem:</b>
 
 1. Struktura:<br />
 
