@@ -1,11 +1,24 @@
 <b>Pierwsze uruchomienie projektu:</b>
 
+a) Z użyciem pip<br />
 Jeśli pip nie jest zainstalowany:
 https://pip.pypa.io/en/stable/installation/
-
 pip install --upgrade pip<br />
 pip install -r requirements.txt<br />
 python3 main.py<br />
+
+b) bez użycia pip<br />
+Niezbędne biblioteki do prawidłowego funkcjonowania:<br />
+matplotlib<br />
+numpy<br />
+imageio<br />
+python3 main.py<br />
+
+
+
+<b>Przykładowa animacja procesu ewolucyjnego:</b>
+
+![Screenshot](example.gif)
 
 
 <b>Podstawowe dane pomagające w zapoznaniu się z projektem:</b>
@@ -42,3 +55,5 @@ https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_mutation.ht
 Wykonanie procesu ewolucyjnego dla początkowej puli osobników<br />
 Wyświetlanie procesu w formie animacji<br />
 Export danych procesu ewolucyjnego do formatu json<br />
+Zapis aniamcji w formie pliku .gif<br />
+Zapis poszczególnych klatek animacji<br />
