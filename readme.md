@@ -12,6 +12,7 @@ Niezbędne biblioteki do prawidłowego funkcjonowania:<br />
 matplotlib<br />
 numpy<br />
 imageio<br />
+python3 main.py<br />
 
 
 
