@@ -1,4 +1,5 @@
 import random
+from typing import Tuple
 
 from converter import Converter
 from probe import Probe
@@ -97,21 +98,23 @@ class Mutator:
         return children
 
     def __reverse_bits(chromosome: str, index_1: int, index_2: int) -> str:
+        start_index, end_index = Mutator.__compare_index(index_1, index_2)
         list_of_bits = [bit for bit in chromosome]
-        selected_bits = [list_of_bits[i] for i in range(index_1, index_2)]
+        selected_bits = [list_of_bits[i] for i in range(start_index, end_index)]
         reversed_bits = selected_bits[::-1]
         next_bit_index = 0
-        for i in range (index_1, index_2):
+        for i in range (start_index, end_index):
             list_of_bits[i] = reversed_bits[next_bit_index]
             next_bit_index += 1
         return "".join(list_of_bits)
 
     def __scramble_bits(chromosome: str, index_1: int, index_2: int) -> str:
+        start_index, end_index = Mutator.__compare_index(index_1, index_2)
         list_of_bits = [bit for bit in chromosome]
-        selected_bits = [list_of_bits[i] for i in range(index_1, index_2)]
+        selected_bits = [list_of_bits[i] for i in range(start_index, end_index)]
         random.shuffle(selected_bits)
         next_bit_index = 0
-        for i in range (index_1, index_2):
+        for i in range (start_index, end_index):
             list_of_bits[i] = selected_bits[next_bit_index]
             next_bit_index += 1
         return "".join(list_of_bits)
@@ -128,3 +131,12 @@ class Mutator:
         else:
             replace_bit = 1
         return f"{chromosome[:index]}{replace_bit}{chromosome[index+1:]}"
+
+    def __compare_index(index_1: int, index_2: int) -> Tuple[int, int]:
+        if index_1 > index_2:
+            start_index = index_2
+            end_index = index_1
+        else:
+            start_index = index_1
+            end_index = index_2
+        return start_index, end_index
