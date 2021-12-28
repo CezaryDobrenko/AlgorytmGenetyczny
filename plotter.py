@@ -31,9 +31,10 @@ class Plotter:
     def draw_animated_eveloution(self, generations: int, save_animation: bool, save_each_frame: bool) -> None:
         for i in range(generations):
             self.draw_frame(i)
-
         if save_animation:
-            self.__export_animation(generations, save_each_frame)
+            self.__export_animation(generations)
+        if not save_each_frame:
+            self.__save_each_frame(generations)
 
     def draw_frame(self, generation: int) -> None:
         plt.cla()
@@ -64,10 +65,12 @@ class Plotter:
             values.append(list_y)
         return arguments, values
 
-    def __export_animation(self, generations: int, save_each_frame: bool) -> None:
+    def __export_animation(self, generations: int) -> None:
             with imageio.get_writer('animations/result.gif', mode='I') as writer:
                 for generation in range(generations):
                     image = imageio.imread(f"frames/{generation}.png")
                     writer.append_data(image)
-                    if not save_each_frame:
-                        os.remove(f"frames/{generation}.png")
+
+    def __save_each_frame(self, generations: int) -> None:
+        for generation in range(generations):
+            os.remove(f"frames/{generation}.png")

@@ -22,7 +22,7 @@ class Simulation:
     def __init__(self, population_size: int, bit_size: int, bounds: Tuple[int, int], tournament_size: int, settings: Dict):
         self.__bounds = bounds
         self.__tournament_size = tournament_size
-        self.__population_ratio = (math.floor(population_size/2), math.ceil(population_size/2))
+        self.__population_ratio = (math.floor(population_size/2)-1, math.ceil(population_size/2))
         self.__population = self.generate_population(population_size, bit_size)
         self.__settings = settings
 
@@ -31,7 +31,6 @@ class Simulation:
         for _ in range(generations):
             parents_count, childrens_count = self.__population_ratio
             current_data = [[],[]]
-
             # best probe section
             best_probe = self.operator_hot_deck(self.__population)
             self.__population.remove(best_probe)
